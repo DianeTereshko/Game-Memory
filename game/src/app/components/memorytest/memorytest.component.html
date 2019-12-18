@@ -1,0 +1,94 @@
+<section class="w3-row">
+    <div class="w3-half">
+        <countdown #cd1 (event)="handleEvent($event)" [config]="{ leftTime: 300, format: 'm:s' }"></countdown>
+    </div>
+    <div class="w3-half">
+        <div class="close-button">
+            <button mat-icon-button (click)="cd1.resume()" color="primary">
+                <mat-icon>slideshow</mat-icon>
+            </button>
+            <button mat-icon-button (click)="cd1.pause()" color="primary">
+                <mat-icon>pause_circle_outline</mat-icon>
+            </button>
+            <button mat-icon-button (click)="cd1.restart()" color="primary">
+                <mat-icon>cached</mat-icon>
+            </button>
+        </div>
+    </div>
+</section>
+<div class="w3-row">
+    <p>Кликайте на облаке и ищите сопадающие избражения</p>
+</div>
+<br>
+<div class="w3-row">
+    <div class="w3-quarter">
+        <p></p>
+    </div>
+    <div class="w3-half">
+        <ng-container *ngFor="let item of cards; let i = index; trackBy: trackByFn">
+            <div class="w3-col" style="width: 15%;" (click)="cardClick(item, cards)">
+                <ng-container *ngIf="isCardClick; else elseTemplate">
+                    <!-- todo Определить что элемент не текущий и удаленный -->
+                    <mat-icon *ngIf="item.id != i && !cards[i].status.deleted"
+                        [ngClass]="cards[i].status.deleted? 'w3-text-blue':'w3-text-blue'" class="w3-padding">cloud
+                    </mat-icon>
+                    <mat-icon *ngIf="item.id != i && cards[i].status.deleted"
+                        [ngClass]="cards[i].status.deleted? 'w3-text-blue':'w3-text-blue'" class="w3-padding">cloud_done
+                    </mat-icon>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <ng-container *ngIf="item.status.isVisible; else elseTemplate">
+                        <mat-icon *ngIf="item.status.isVisible" class="w3-padding">{{item.name}}</mat-icon>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <ng-container *ngIf="item.id != i && !cards[i].status.deleted; else elseTemplate">
+                            <mat-icon *ngIf="!item.status.isVisible" [ngClass]="'w3-text-blue'" class="w3-padding">cloud
+                            </mat-icon>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <mat-icon *ngIf="item.id != i && cards[i].status.deleted"
+                                [ngClass]="cards[i].status.deleted? 'w3-text-blue':'w3-text-blue'" class="w3-padding">
+                                cloud_done</mat-icon>
+                        </ng-template>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </ng-container>
+        <ng-container *ngFor="let item of cards2; let i = index;">
+            <div class="w3-col" style="width: 15%;" (click)="cardClick(item, cards2)">
+                <ng-container *ngIf="isCardClick2; else elseTemplate">
+                    <mat-icon *ngIf="item.id != i && !cards2[i].status.deleted"
+                        [ngClass]="cards2[i].status.deleted? 'w3-text-blue':'w3-text-blue'" class="w3-padding">cloud
+                    </mat-icon>
+                    <mat-icon *ngIf="item.id != i && cards2[i].status.deleted"
+                        [ngClass]="cards2[i].status.deleted? 'w3-text-blue':'w3-text-blue'" class="w3-padding">
+                        cloud_done</mat-icon>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <ng-container *ngIf="item.status.isVisible; else elseTemplate">
+                        <mat-icon *ngIf="item.status.isVisible" class="w3-padding">{{item.name}}</mat-icon>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <ng-container *ngIf="item.id != i && !cards2[i].status.deleted; else elseTemplate">
+                            <mat-icon *ngIf="!item.status.isVisible" [ngClass]="'w3-text-blue'" class="w3-padding">cloud
+                            </mat-icon>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <mat-icon *ngIf="item.id != i && cards2[i].status.deleted"
+                                [ngClass]="cards2[i].status.deleted? 'w3-text-blue':'w3-text-blue'" class="w3-padding">
+                                cloud_done</mat-icon>
+                        </ng-template>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="w3-quarter">
+    <p></p>
+</div>
+<p></p>
+<br>
+<div mat-dialog-actions class="close-button w3-padding">
+    <button mat-button color="primary" [mat-dialog-close]="">Завершить игру</button>
+</div>

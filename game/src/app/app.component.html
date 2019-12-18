@@ -1,0 +1,30 @@
+<!-- <app-memorytest></app-memorytest> -->
+<mat-drawer-container class="container" autosize>
+
+    <mat-drawer #drawer class="sidenav">
+        <p>Меню</p>
+        <button routerLink="/start" routerLinkActive="true" mat-button (click)="drawer.close()">Начать игру</button>
+        <button routerLink="/register" routerLinkActive="true" mat-button
+            (click)="drawer.close()">Зарегистрироваться</button>
+        <button routerLink="/raiting" routerLinkActive="true" mat-button (click)="drawer.close()">Рейтинг
+            игроков</button>
+        <button routerLink="/about" routerLinkActive="true" mat-button (click)="drawer.close()">Об авторе</button>
+    </mat-drawer>
+
+    <div class="sidenav-content">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <button mat-icon-button (click)="drawer.toggle()">
+                    <mat-icon>
+                        menu
+                    </mat-icon>
+                </button>
+                <span class="spacer"></span>
+                <span>Игра "Развитие краткосрочной памяти"</span>
+                <span class="spacer"></span>
+                <mat-icon>favorite</mat-icon>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+    <router-outlet></router-outlet>
+</mat-drawer-container>

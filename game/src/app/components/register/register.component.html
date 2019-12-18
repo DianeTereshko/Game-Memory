@@ -1,0 +1,74 @@
+<div class="container">
+    <br><br><br>
+    <section class="w3-row">
+        <div class="w3-third">
+            <p></p>
+        </div>
+        <div class="w3-third">
+            <mat-vertical-stepper [linear]="true" #stepper>
+                <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Введите имя</ng-template>
+                        <mat-form-field>
+                            <input matInput [formControl]="this.firstFormGroup.controls['name']" required />
+                        </mat-form-field>
+                        <div>
+                            <button mat-icon-button matStepperNext>
+                                <mat-icon>arrow_downward</mat-icon>
+                            </button>
+                            <button mat-icon-button matStepperNext>
+                                <mat-icon>face</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Введите e-mail</ng-template>
+                        <mat-form-field>
+                            <input matInput [formControl]="this.secondFormGroup.controls['email']" required />
+                        </mat-form-field>
+                        <div>
+                            <button mat-icon-button matStepperNext>
+                                <mat-icon>arrow_downward</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon>mail_outline</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Когда вы родились?</ng-template>
+                        <mat-form-field>
+                            <input matInput [formControl]="this.thisrdFormGroup.controls['birth']" placeholder="Выберите дату"
+                                [matDatepicker]="simpleDate" />
+                            <mat-datepicker-toggle matSuffix [for]="simpleDate"></mat-datepicker-toggle>
+                            <mat-datepicker #simpleDate></mat-datepicker>
+                            <!-- <input matInput [formControl]="this.secondFormGroup.controls['email']" required /> -->
+                        </mat-form-field>
+                        <div>
+                            <button mat-icon-button matStepperNext>
+                                <mat-icon>arrow_downward</mat-icon>
+                            </button>
+                            <button mat-icon-button matStepperNext>
+                                <mat-icon>cake</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Зарегистрироваться</ng-template>
+                    <div>
+                        <p></p>
+                        <button mat-flat-button color="primary" (click)="register()">Отправить</button>
+                    </div>
+                </mat-step>
+            </mat-vertical-stepper>
+        </div>
+        <div class="w3-third">
+            <p></p>
+        </div>
+    </section>
+</div>
